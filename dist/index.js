@@ -8,6 +8,8 @@ const setup_app_1 = require("./setup-app");
 const app = (0, express_1.default)();
 (0, setup_app_1.setupApp)(app);
 const PORT = process.env.PORT || 3000;
+//@ts-ignore
+app.get("/", (req, res) => res.send("Express on Vercel"));
 // запуск приложения
 app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}`);
