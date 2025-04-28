@@ -10,8 +10,7 @@
     "dev": "nodemon --inspect dist/index.js",
     "jest": "jest -i",
     "lint": "eslint --fix .",
-    "format": "prettier --write .",
-    "build": "tsc"
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@vercel/node": "^5.1.14",
