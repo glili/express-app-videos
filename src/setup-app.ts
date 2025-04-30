@@ -3,8 +3,8 @@ import { videosRouter } from "./videos/routers/videos.router";
 import { testingRouter } from "./videos/routers/testing.routers";
 import { setupSwagger } from './core/swagger/setup-swagger';
 import { HttpStatus } from "./core/types/http-statuses";
-import { db } from "./db/in-memory.db";
-import { mapToVideoListOutput } from "./videos/routers/mappers/map-list-video-to-output";
+// import { db } from "./db/in-memory.db";
+// import { mapToVideoListOutput } from "./videos/routers/mappers/map-list-video-to-output";
 
 
 

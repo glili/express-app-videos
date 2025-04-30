@@ -16,6 +16,6 @@ export enum Resolution {
     canBeDownloaded: boolean;  // Default: false
     minAgeRestriction: number | null;
     createdAt: string;
-    publicationDate: Date;
+    publicationDate: string;
     availableResolutions: Resolution[];
   };
