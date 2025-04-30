@@ -1,6 +1,6 @@
 import { Video } from '../../types/video';
 import { ResourceType } from '../../../core/types/resource-type';
-import { VideoListOutput } from '../../vto/video-list.output';
+import { VideoListOutput } from '../../dto/video-list.output';
 
 export const mapToVideoListOutput = (videos: Video[]): VideoListOutput => {
   return {

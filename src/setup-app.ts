@@ -7,36 +7,35 @@ import { db } from "./db/in-memory.db";
 import { mapToVideoListOutput } from "./videos/routers/mappers/map-list-video-to-output";
 
 
- 
+
 export const setupApp = (app: Express) => {
-    app.use(express.json());
-  
-    app.get('/', (req: Request, res: Response) => {
-      res.status(200).send('hello world!!!');
-    });
+  app.use(express.json());
 
-app.get('/videos', (req: Request, res: Response) => {
-  console.log('GET /videos endpoint hit')
+  app.get('/', (req: Request, res: Response) => {
+    res.status(200).send('Video App!');
+  });
 
-  const videos = mapToVideoListOutput(db.videos);
+  // app.get('/videos', (req: Request, res: Response) => {
+  //  // console.log('GET /videos endpoint hit')
 
-  res.status(200).json(videos);
-});
-  
-    app.get('/testing', (req: Request, res: Response) => {
-      res.status(200).send('Testing route');
-    });
-  
-    app.delete("/testing/all-data", (req, res) => {
-      db.videos = [];
-      res.sendStatus(HttpStatus.NoContent);
-    });
+  //   const videos = mapToVideoListOutput(db.videos);
+  //   res.status(200).json(videos);
+  // });
+
+  // app.get('/testing', (req: Request, res: Response) => {
+  //   res.status(200).send('Testing route');
+  // });
+
+  // app.delete("/testing/all-data", (req, res) => {
+  //   db.videos = [];
+  //   res.sendStatus(HttpStatus.NoContent);
+  // });
 
 
-    app.use("/videos", videosRouter);
-    app.use("/testing", testingRouter);
+  app.use("/videos", videosRouter);
+  app.use("/testing", testingRouter);
 
-    setupSwagger(app);
-    return app;
-  
+  setupSwagger(app);
+  return app;
+
 };

@@ -1,5 +1,5 @@
 import { Video } from '../../types/video';
-import { VideoOutput } from '../../vto/video.output';
+import { VideoOutput } from '../../dto/video.output';
 import { ResourceType } from '../../../core/types/resource-type';
 
 export const mapToVideoOutput = (video: Video): VideoOutput => {
@@ -13,8 +13,8 @@ export const mapToVideoOutput = (video: Video): VideoOutput => {
       minAgeRestriction: video.minAgeRestriction
         ? video.minAgeRestriction
         : null,
-      createdAt: new Date(video.createdAt).toISOString(),
-      publicationDate: new Date(video.publicationDate).toISOString(),
+      createdAt: video.createdAt,
+      publicationDate: video.publicationDate,
       availableResolutions: video.availableResolutions,
     },
   };

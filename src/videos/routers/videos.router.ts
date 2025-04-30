@@ -1,15 +1,15 @@
 import { Request, Response, Router } from 'express';
-import { VideoInput } from '../vto/video.intput';
-import { videoInputVtoValidation } from '../validation/videoInputVtoValidation';
+import { VideoInput } from '../dto/video.intput';
+import { videoInputDtoValidation } from '../validation/videoInputDtoValidation';
 import { HttpStatus } from '../../core/types/http-statuses';
 import { createErrorMessages } from '../../core/utils/error.utils';
 import { Video } from '../types/video';
 import { db } from '../../db/in-memory.db';
 import { mapToVideoListOutput } from './mappers/map-list-video-to-output';
 import { mapToVideoOutput } from './mappers/map-video-to-output';
-import { VideoUpdateInput } from '../vto/video-update.input';
-import { VideoListOutput } from '../vto/video-list.output';
-import { VideoCreateInput } from '../vto/video-create.input';
+import { VideoUpdateInput } from '../dto/video-update.input';
+import { VideoListOutput } from '../dto/video-list.output';
+import { VideoCreateInput } from '../dto/video-create.input';
 
 export const videosRouter = Router({});
 
@@ -19,11 +19,10 @@ videosRouter
     res.status(200).send(videos);
   })
 
-  // .get("/videos", (req: Request, res: Response) => {
-  //   console.log('GET /videos endpoint hit')
-  //   const videos = mapToVideoListOutput(db.videos);
-  //   res.status(200).json(videos);
-  // })
+  .get("/videos", (req: Request, res: Response) => {
+    const videos = mapToVideoListOutput(db.videos);
+    res.status(200).json(videos);
+  })
   
   .get('/:id', (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
@@ -41,23 +40,23 @@ videosRouter
   })
 
   .post('', (req: Request<{}, {}, VideoCreateInput>, res: Response) => {
-    const errors = videoInputVtoValidation(req.body.data);
+    const errors = videoInputDtoValidation(req.body.data);
 
     if (errors.length > 0) {
       res.status(HttpStatus.BadRequest).send(createErrorMessages(errors));
       return;
     }
 
-    const { title, author, canBeDownloaded, minAgeRestriction, createdAt, publicationDate, availableResolutions } = req.body.data.attributes;
+    // const { title, author, canBeDownloaded, minAgeRestriction, createdAt, publicationDate, availableResolutions } = req.body.data.attributes;
     const newVideo: Video = {
-      id: new Date().getTime(),
+      id: db.videos.length ? db.videos[db.videos.length - 1].id + 1 : 1,
       title: req.body.data.attributes.title,
       author: req.body.data.attributes.author,
       canBeDownloaded: req.body.data.attributes.canBeDownloaded,
       minAgeRestriction: req.body.data.attributes.minAgeRestriction,
       availableResolutions: req.body.data.attributes.availableResolutions,
       createdAt: req.body.data.attributes.createdAt,
-      publicationDate: req.body.data.attributes.publicationDate,
+      publicationDate: new Date(),
     };
     db.videos.push(newVideo);
     const mappedVideo = mapToVideoOutput(newVideo);
@@ -67,7 +66,7 @@ videosRouter
   .put(
     '/:id',
     (req: Request<{ id: string }, {}, VideoUpdateInput>, res: Response) => {
-      console.log('in put: ', req.body.data);
+     // console.log('in put: ', req.body.data);
       const id = parseInt(req.params.id);
       const index = db.videos.findIndex((v) => v.id === id);
 
@@ -76,13 +75,13 @@ videosRouter
           .status(HttpStatus.NotFound)
           .send(
             createErrorMessages([
-              { field: 'id', message: 'Vehicle not found' },
+              { field: 'id', message: 'Video not found' },
             ]),
           );
         return;
       }
 
-      const errors = videoInputVtoValidation(req.body.data);
+      const errors = videoInputDtoValidation(req.body.data);
 
       if (errors.length > 0) {
         res.status(HttpStatus.BadRequest).send(createErrorMessages(errors));
@@ -111,7 +110,7 @@ videosRouter
       res
         .status(HttpStatus.NotFound)
         .send(
-          createErrorMessages([{ field: 'id', message: 'Vehicle not found' }]),
+          createErrorMessages([{ field: 'id', message: 'Video not found' }]),
         );
       return;
     }

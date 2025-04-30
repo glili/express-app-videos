@@ -1,9 +1,9 @@
-import { VideoInput } from '../vto/video.intput';
+import { VideoInput } from '../dto/video.intput';
 import { Resolution } from '../types/video';
 import { FieldError } from '../types/FieldError';
 import { isValidDate } from '../../core/utils/error.utils'
 
-export const videoInputVtoValidation = (data: VideoInput): FieldError[] => {
+export const videoInputDtoValidation = (data: VideoInput): FieldError[] => {
   const errors: FieldError[] = [];
 
   const attributes = data.attributes;
