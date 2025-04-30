@@ -56,7 +56,7 @@ videosRouter
       minAgeRestriction: req.body.data.attributes.minAgeRestriction,
       availableResolutions: req.body.data.attributes.availableResolutions,
       createdAt: req.body.data.attributes.createdAt,
-      publicationDate: new Date(),
+      publicationDate: new Date().toISOString(),
     };
     db.videos.push(newVideo);
     const mappedVideo = mapToVideoOutput(newVideo);
