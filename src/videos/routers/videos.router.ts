@@ -23,7 +23,7 @@ videosRouter
     const videos = mapToVideoListOutput(db.videos);
     res.status(200).json(videos);
   })
-  
+
   .get('/:id', (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
     const video = db.videos.find((d) => d.id === id);
@@ -47,7 +47,6 @@ videosRouter
       return;
     }
 
-    // const { title, author, canBeDownloaded, minAgeRestriction, createdAt, publicationDate, availableResolutions } = req.body.data.attributes;
     const newVideo: Video = {
       id: db.videos.length ? db.videos[db.videos.length - 1].id + 1 : 1,
       title: req.body.data.attributes.title,
@@ -55,8 +54,8 @@ videosRouter
       canBeDownloaded: req.body.data.attributes.canBeDownloaded,
       minAgeRestriction: req.body.data.attributes.minAgeRestriction,
       availableResolutions: req.body.data.attributes.availableResolutions,
-      createdAt: req.body.data.attributes.createdAt,
-      publicationDate: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+      publicationDate: new Date(Date.now() + 86400000).toISOString(),
     };
     db.videos.push(newVideo);
     const mappedVideo = mapToVideoOutput(newVideo);
@@ -66,7 +65,7 @@ videosRouter
   .put(
     '/:id',
     (req: Request<{ id: string }, {}, VideoUpdateInput>, res: Response) => {
-     // console.log('in put: ', req.body.data);
+      // console.log('in put: ', req.body.data);
       const id = parseInt(req.params.id);
       const index = db.videos.findIndex((v) => v.id === id);
 
@@ -103,7 +102,7 @@ videosRouter
   .delete('/:id', (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
 
-    
+
     const index = db.videos.findIndex((v) => v.id === id);
 
     if (index === -1) {

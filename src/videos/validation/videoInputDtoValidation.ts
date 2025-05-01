@@ -12,7 +12,7 @@ export const videoInputDtoValidation = (data: VideoInput): FieldError[] => {
     !attributes.title ||
     typeof attributes.title !== 'string' ||
     attributes.title.trim().length < 2 ||
-    attributes.title.trim().length > 41
+    attributes.title.trim().length > 40
   ) {
     errors.push({ field: 'title', message: 'Invalid title' });
   }
@@ -21,7 +21,7 @@ export const videoInputDtoValidation = (data: VideoInput): FieldError[] => {
     !attributes.author ||
     typeof attributes.author !== 'string' ||
     attributes.author.trim().length < 2 ||
-    attributes.author.trim().length > 21
+    attributes.author.trim().length > 20
   ) {
     errors.push({ field: 'author', message: 'Invalid author' });
   }
@@ -33,8 +33,7 @@ export const videoInputDtoValidation = (data: VideoInput): FieldError[] => {
   if (
     attributes.minAgeRestriction !== null &&
     (typeof attributes.minAgeRestriction !== 'number' ||
-    attributes.minAgeRestriction < 0 ||
-    attributes.minAgeRestriction > 100)
+    attributes.minAgeRestriction < 0)
   ) {
     errors.push({ field: 'minAgeRestriction', message: 'Invalid minAgeRestriction' });
   }

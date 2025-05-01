@@ -1,7 +1,7 @@
 
 {
-
-    "version": 2, 
+    "version": 2,
+    "name": "express-app-videos",
     "builds": [
  
        { "src": "src/index.ts", "use": "@vercel/node" }
@@ -10,7 +10,7 @@
  
     "routes": [
  
-       { "src": "/(.*)", "dest": "index.ts" }
+       { "src": "/(.*)", "dest": "src/index.ts" }
  
     ]
  

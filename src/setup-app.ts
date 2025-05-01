@@ -32,8 +32,8 @@ export const setupApp = (app: Express) => {
   // });
 
 
-  app.use("/videos", videosRouter);
-  app.use("/testing", testingRouter);
+  app.use("/api/videos", videosRouter);
+  app.use("/api/testing", testingRouter);
 
   setupSwagger(app);
   return app;
