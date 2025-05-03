@@ -19,10 +19,10 @@ videosRouter
     res.status(200).send(videos);
   })
 
-  .get("/videos", (req: Request, res: Response) => {
-    const videos = mapToVideoListOutput(db.videos);
-    res.status(200).json(videos);
-  })
+  // .get("/videos", (req: Request, res: Response) => {
+  //   const videos = mapToVideoListOutput(db.videos);
+  //   res.status(200).json(videos);
+  // })
 
   .get('/:id', (req: Request, res: Response) => {
     const id = parseInt(req.params.id);

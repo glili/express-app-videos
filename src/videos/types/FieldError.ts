@@ -3,6 +3,6 @@ export type FieldError = {
     message: string;
   };
 
-  export type ValidationError = {
-    errorsMessages: FieldError[] | null;
-  };
+  // export type ValidationError = {
+  //   errorsMessages: FieldError[] | null;
+  // };

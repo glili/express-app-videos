@@ -1,11 +1,11 @@
 openapi: 3.0.0
 info:
-  title: Videos API
+  title: Video API
   version: 1.0.0
-  description: Videos API documentation
+  description: Video API documentation
 
 tags:
   - name: Testing
     description: API for clearing the database
   - name: Videos
-    description: API for managing drivers
+    description: API for managing videos

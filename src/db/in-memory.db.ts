@@ -11,7 +11,7 @@ export const db = {
             minAgeRestriction: 18,
             createdAt: '2023-07-01',
             publicationDate: '2023-07-02',
-            availableResolutions: [Resolution.P144, Resolution.P240],
+            availableResolutions: [Resolution.P144],
         },
         {
             id: 2,

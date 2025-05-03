@@ -6,56 +6,63 @@ import { isValidDate } from '../../core/utils/error.utils'
 export const videoInputDtoValidation = (data: VideoInput): FieldError[] => {
   const errors: FieldError[] = [];
 
-  const attributes = data.attributes;
-
+  const {
+    title,
+    author,
+    canBeDownloaded,
+    minAgeRestriction,
+    createdAt,
+    publicationDate,
+    availableResolutions,
+  } = data.attributes;
   if (
-    !attributes.title ||
-    typeof attributes.title !== 'string' ||
-    attributes.title.trim().length < 2 ||
-    attributes.title.trim().length > 40
+    !title ||
+    typeof title !== 'string' ||
+    title.trim().length < 2 ||
+    title.trim().length > 40
   ) {
     errors.push({ field: 'title', message: 'Invalid title' });
   }
 
   if (
-    !attributes.author ||
-    typeof attributes.author !== 'string' ||
-    attributes.author.trim().length < 2 ||
-    attributes.author.trim().length > 20
+    !author ||
+    typeof author !== 'string' ||
+    author.trim().length < 2 ||
+    author.trim().length > 20
   ) {
     errors.push({ field: 'author', message: 'Invalid author' });
   }
 
-  if (typeof attributes.canBeDownloaded !== 'boolean') {
+  if (typeof canBeDownloaded !== 'boolean') {
     errors.push({ field: 'canBeDownloaded', message: 'Invalid canBeDownloaded' });
   }
 
   if (
-    attributes.minAgeRestriction !== null &&
-    (typeof attributes.minAgeRestriction !== 'number' ||
-    attributes.minAgeRestriction < 0)
+    minAgeRestriction !== null &&
+    (typeof minAgeRestriction !== 'number' ||
+    minAgeRestriction < 0)
   ) {
     errors.push({ field: 'minAgeRestriction', message: 'Invalid minAgeRestriction' });
   }
 
-  if (!attributes.createdAt || !isValidDate(attributes.createdAt)) {
+  if (!createdAt || !isValidDate(createdAt)) {
     errors.push({ field: 'createdAt', message: 'Invalid createdAt' });
   }
 
-  if (!attributes.publicationDate || !isValidDate(attributes.publicationDate)) {
+  if (!publicationDate || !isValidDate(publicationDate)) {
     errors.push({ field: 'publicationDate', message: 'Invalid publicationDate' });
   }
 
-  if (!Array.isArray(attributes.availableResolutions)) {
+  if (!Array.isArray(availableResolutions)) {
     errors.push({ field: 'availableResolutions', message: 'availableResolutions must be an array' });
-  } else if (attributes.availableResolutions.length) {
-      if(attributes.availableResolutions.length < 1){
+  } else if (availableResolutions.length) {
+      if(availableResolutions.length < 1){
         errors.push({
           field:'availableResolutions',
-          message:"At least on resolution should be provided"
+          message:"At least on resolution should be provided",
         });
       }
-      const invalid = attributes.availableResolutions.filter(
+      const invalid = availableResolutions.filter(
         (res: string) => !Object.values(Resolution).includes(res as Resolution)
       );
 

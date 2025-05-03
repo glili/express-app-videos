@@ -7,7 +7,7 @@ export enum Resolution {
     P1080 = 'p1080',
     P1440 = 'p1440',
     P2160 = 'p2160',
-  }
+  };
 
   export type Video = {
     id: number;
