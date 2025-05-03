@@ -11,7 +11,7 @@ export const db = {
             minAgeRestriction: 18,
             createdAt: '2023-07-01',
             publicationDate: '2023-07-02',
-            availableResolutions: [],
+            availableResolutions: [Resolution.P144, Resolution.P240],
         },
         {
             id: 2,
@@ -21,7 +21,7 @@ export const db = {
             minAgeRestriction: 16,
             createdAt: '2023-09-01',
             publicationDate: '2023-09-02',
-            availableResolutions: [],
+            availableResolutions: [Resolution.P360],
         },
         {
             id: 3,
@@ -30,8 +30,8 @@ export const db = {
             canBeDownloaded: true,
             minAgeRestriction: 10,
             createdAt: '2023-08-01',
-            publicationDate: '2023-08-01',
-            availableResolutions: [],
+            publicationDate: '2023-08-02',
+            availableResolutions: [Resolution.P1080],
         },
     ],
 };

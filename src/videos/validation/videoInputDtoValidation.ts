@@ -48,6 +48,17 @@ export const videoInputDtoValidation = (data: VideoInput): FieldError[] => {
 
   if (!Array.isArray(attributes.availableResolutions)) {
     errors.push({ field: 'availableResolutions', message: 'availableResolutions must be an array' });
+  } else if (attributes.availableResolutions.length) {
+      if(attributes.availableResolutions.length < 1){
+        errors.push({
+          field:'availableResolutions',
+          message:"At least on resolution should be provided"
+        });
+      }
+      const invalid = attributes.availableResolutions.filter(
+        (res: string) => !Object.values(Resolution).includes(res as Resolution)
+      );
+
   }
 
   return errors;
