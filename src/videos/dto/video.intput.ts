@@ -1,9 +1,7 @@
 import { Resolution } from '../types/video';
-import { ResourceType } from '../../core/types/resource-type';
 
 export type VideoInput = {
-  type: ResourceType.Videos;
-  attributes: {
+
     title: string;
     author: string;
     canBeDownloaded: boolean;  // Default: false
@@ -11,6 +9,5 @@ export type VideoInput = {
     createdAt: string;
     publicationDate: string;
     availableResolutions: Resolution[];
-  };
 };
-    // this is data we will be sent 
+    // this is data we will be sent  

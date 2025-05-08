@@ -5,18 +5,12 @@ import { HttpStatus } from '../../core/types/http-statuses';
 import { createErrorMessages } from '../../core/utils/error.utils';
 import { Video } from '../types/video';
 import { db } from '../../db/in-memory.db';
-import { mapToVideoListOutput } from './mappers/map-list-video-to-output';
-import { mapToVideoOutput } from './mappers/map-video-to-output';
-import { VideoUpdateInput } from '../dto/video-update.input';
-import { VideoListOutput } from '../dto/video-list.output';
-import { VideoCreateInput } from '../dto/video-create.input';
 
 export const videosRouter = Router({});
 
 videosRouter
-  .get('', (req: Request, res: Response<VideoListOutput>) => {
-    const videos = mapToVideoListOutput(db.videos);
-    res.status(200).send(videos);
+  .get('', (req: Request, res: Response) => {
+    res.status(200).send(db.videos);
   })
 
   // .get("/videos", (req: Request, res: Response) => {
@@ -36,11 +30,11 @@ videosRouter
         );
       return;
     }
-    res.status(200).send(mapToVideoOutput(video));
+    res.status(200).send(video);
   })
 
-  .post('', (req: Request<{}, {}, VideoCreateInput>, res: Response) => {
-    const errors = videoInputDtoValidation(req.body.data);
+  .post('', (req: Request<{}, {}, VideoInput>, res: Response) => {
+    const errors = videoInputDtoValidation(req.body);
 
     if (errors.length > 0) {
       res.status(HttpStatus.BadRequest).send(createErrorMessages(errors));
@@ -49,23 +43,20 @@ videosRouter
 
     const newVideo: Video = {
       id: db.videos.length ? db.videos[db.videos.length - 1].id + 1 : 1,
-      title: req.body.data.attributes.title,
-      author: req.body.data.attributes.author,
-      canBeDownloaded: req.body.data.attributes.canBeDownloaded,
-      minAgeRestriction: req.body.data.attributes.minAgeRestriction,
-      availableResolutions: req.body.data.attributes.availableResolutions,
+      title: req.body.title,
+      author: req.body.author,
+      canBeDownloaded: req.body.canBeDownloaded,
+      minAgeRestriction: req.body.minAgeRestriction,
+      availableResolutions: req.body.availableResolutions,
       createdAt: new Date().toISOString(),
       publicationDate: new Date(Date.now() + 86400000).toISOString(),
     };
     db.videos.push(newVideo);
-    const mappedVideo = mapToVideoOutput(newVideo);
-    res.status(HttpStatus.Created).send(mappedVideo);
+    res.status(HttpStatus.Created).send(newVideo);
   })
 
   .put(
-    '/:id',
-    (req: Request<{ id: string }, {}, VideoUpdateInput>, res: Response) => {
-      // console.log('in put: ', req.body.data);
+    '/:id',(req: Request, res: Response) => {
       const id = parseInt(req.params.id);
       const index = db.videos.findIndex((v) => v.id === id);
 

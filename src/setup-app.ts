@@ -1,12 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import { videosRouter } from "./videos/routers/videos.router";
 import { testingRouter } from "./videos/routers/testing.routers";
-import { setupSwagger } from './core/swagger/setup-swagger';
-import { HttpStatus } from "./core/types/http-statuses";
-// import { db } from "./db/in-memory.db";
-// import { mapToVideoListOutput } from "./videos/routers/mappers/map-list-video-to-output";
-
-
 
 export const setupApp = (app: Express) => {
   app.use(express.json());
@@ -34,8 +28,7 @@ export const setupApp = (app: Express) => {
 
   app.use("/api/videos", videosRouter);
   app.use("/api/testing", testingRouter);
-
-  setupSwagger(app);
+  
   return app;
 
 };

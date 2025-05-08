@@ -6,63 +6,54 @@ import { isValidDate } from '../../core/utils/error.utils'
 export const videoInputDtoValidation = (data: VideoInput): FieldError[] => {
   const errors: FieldError[] = [];
 
-  const {
-    title,
-    author,
-    canBeDownloaded,
-    minAgeRestriction,
-    createdAt,
-    publicationDate,
-    availableResolutions,
-  } = data.attributes;
   if (
-    !title ||
-    typeof title !== 'string' ||
-    title.trim().length < 2 ||
-    title.trim().length > 40
+    !data.title ||
+    typeof data.title !== 'string' ||
+    data.title.trim().length < 2 ||
+    data.title.trim().length > 40
   ) {
     errors.push({ field: 'title', message: 'Invalid title' });
   }
 
   if (
-    !author ||
-    typeof author !== 'string' ||
-    author.trim().length < 2 ||
-    author.trim().length > 20
+    !data.author ||
+    typeof data.author !== 'string' ||
+    data.author.trim().length < 2 ||
+    data.author.trim().length > 20
   ) {
     errors.push({ field: 'author', message: 'Invalid author' });
   }
 
-  if (typeof canBeDownloaded !== 'boolean') {
+  if (typeof data.canBeDownloaded !== 'boolean') {
     errors.push({ field: 'canBeDownloaded', message: 'Invalid canBeDownloaded' });
   }
 
   if (
-    minAgeRestriction !== null &&
-    (typeof minAgeRestriction !== 'number' ||
-    minAgeRestriction < 0)
+    data.minAgeRestriction !== null &&
+    (typeof data.minAgeRestriction !== 'number' ||
+    data.minAgeRestriction < 0)
   ) {
     errors.push({ field: 'minAgeRestriction', message: 'Invalid minAgeRestriction' });
   }
 
-  if (!createdAt || !isValidDate(createdAt)) {
+  if (!data.createdAt || !isValidDate(data.createdAt)) {
     errors.push({ field: 'createdAt', message: 'Invalid createdAt' });
   }
 
-  if (!publicationDate || !isValidDate(publicationDate)) {
+  if (!data.publicationDate || !isValidDate(data.publicationDate)) {
     errors.push({ field: 'publicationDate', message: 'Invalid publicationDate' });
   }
 
-  if (!Array.isArray(availableResolutions)) {
+  if (!Array.isArray(data.availableResolutions)) {
     errors.push({ field: 'availableResolutions', message: 'availableResolutions must be an array' });
-  } else if (availableResolutions.length) {
-      if(availableResolutions.length < 1){
+  } else if (data.availableResolutions.length) {
+      if(data.availableResolutions.length < 1){
         errors.push({
           field:'availableResolutions',
           message:"At least on resolution should be provided",
         });
       }
-      const invalid = availableResolutions.filter(
+      const invalid = data.availableResolutions.filter(
         (res: string) => !Object.values(Resolution).includes(res as Resolution)
       );
 
