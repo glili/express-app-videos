@@ -12,7 +12,7 @@ export const videoInputDtoValidation = (data: VideoInput): FieldError[] => {
     data.title.trim().length < 2 ||
     data.title.trim().length > 40
   ) {
-    errors.push({ field: 'title', message: 'Invalid title' });
+    errors.push({ message: 'Invalid title',field: 'title' });
   }
 
   if (
@@ -21,7 +21,7 @@ export const videoInputDtoValidation = (data: VideoInput): FieldError[] => {
     data.author.trim().length < 2 ||
     data.author.trim().length > 20
   ) {
-    errors.push({ field: 'author', message: 'Invalid author' });
+    errors.push({ message: 'Invalid author', field: 'author' });
   }
 
   // if (typeof data.canBeDownloaded !== 'boolean') {
@@ -45,12 +45,12 @@ export const videoInputDtoValidation = (data: VideoInput): FieldError[] => {
   // }
 
   if (!Array.isArray(data.availableResolutions)) {
-    errors.push({ field: 'availableResolutions', message: 'availableResolutions must be an array' });
+    errors.push({  message: 'availableResolutions must be an array', field: 'availableResolutions' });
   } else if (data.availableResolutions.length) {
       if(data.availableResolutions.length < 1){
         errors.push({
-          field:'availableResolutions',
           message:"At least on resolution should be provided",
+          field:'availableResolutions',
         });
       }
       const invalid = data.availableResolutions.filter(

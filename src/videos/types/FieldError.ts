@@ -1,6 +1,6 @@
 export type FieldError = {
-    field: string;
     message: string;
+    field: string;
   };
 
   // export type ValidationError = {

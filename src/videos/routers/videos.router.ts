@@ -21,7 +21,7 @@ videosRouter
       res
         .status(HttpStatus.NotFound)
         .send(
-          createErrorMessages([{ field: 'id', message: 'Video not found' }]),
+          createErrorMessages([{ message: 'Video not found', field: 'id'  }]),
         );
       return;
     }
@@ -60,7 +60,7 @@ videosRouter
           .status(HttpStatus.NotFound)
           .send(
             createErrorMessages([
-              { field: 'id', message: 'Video not found' },
+              { message: 'Video not found', field: 'id' },
             ]),
           );
         return;
@@ -79,6 +79,7 @@ videosRouter
       video.author = req.body.data.attributes.author;
       video.canBeDownloaded = req.body.data.attributes.canBeDownloaded;
       video.minAgeRestriction = req.body.data.attributes.minAgeRestriction;
+      video.publicationDate = new Date().toISOString(),
       video.availableResolutions = req.body.data.attributes.availableResolutions;
 
       res.sendStatus(HttpStatus.NoContent);
@@ -95,7 +96,7 @@ videosRouter
       res
         .status(HttpStatus.NotFound)
         .send(
-          createErrorMessages([{ field: 'id', message: 'Video not found' }]),
+          createErrorMessages([{ message: 'Video not found', field: 'id' }]),
         );
       return;
     }
