@@ -12,7 +12,7 @@ export const videoInputDtoValidation = (data: VideoInput): FieldError[] => {
     data.title.trim().length < 2 ||
     data.title.trim().length > 40
   ) {
-    errors.push({ message: 'Invalid title',field: 'title' });
+    errors.push({ message: 'Invalid title', field: 'title' });
   }
 
   if (
@@ -45,14 +45,14 @@ export const videoInputDtoValidation = (data: VideoInput): FieldError[] => {
   // }
 
   if (!Array.isArray(data.availableResolutions)) {
-    errors.push({  message: 'availableResolutions must be an array', field: 'availableResolutions' });
+    errors.push({ message: 'availableResolutions must be an array', field: 'availableResolutions' });
   } else if (data.availableResolutions.length) {
-      if(data.availableResolutions.length < 1){
-        errors.push({
-          message:"At least on resolution should be provided",
-          field:'availableResolutions',
-        });
-      } else {
+    if (data.availableResolutions.length < 1) {
+      errors.push({
+        message: "At least on resolution should be provided",
+        field: 'availableResolutions',
+      });
+    } else {
       const invalid = data.availableResolutions.filter(
         (res: string) => !Object.values(Resolution).includes(res as Resolution)
       );
@@ -61,10 +61,10 @@ export const videoInputDtoValidation = (data: VideoInput): FieldError[] => {
           message: `Invalid resolution(s) provided: ${invalid.join(', ')}`,
           field: 'availableResolutions',
         });
-    }
+      }
 
+    }
   }
-}
 
   return errors;
 };
