@@ -24,17 +24,17 @@ export const videoInputDtoValidation = (data: VideoInput): FieldError[] => {
     errors.push({ message: 'Invalid author', field: 'author' });
   }
 
-  if (typeof data.canBeDownloaded !== 'boolean') {
-    errors.push({ message: 'Invalid canBeDownloaded', field: 'canBeDownloaded' });
-  }
+  // if (typeof data.canBeDownloaded !== 'boolean') {
+  //   errors.push({ message: 'Invalid canBeDownloaded', field: 'canBeDownloaded' });
+  // }
 
-  if (
-    data.minAgeRestriction !== null &&
-    (typeof data.minAgeRestriction !== 'number' ||
-    data.minAgeRestriction < 0)
-  ) {
-    errors.push({ message: 'Invalid minAgeRestriction', field: 'minAgeRestriction' });
-  }
+  // if (
+  //   data.minAgeRestriction !== null &&
+  //   (typeof data.minAgeRestriction !== 'number' ||
+  //   data.minAgeRestriction < 0)
+  // ) {
+  //   errors.push({ message: 'Invalid minAgeRestriction', field: 'minAgeRestriction' });
+  // }
 
   // if (!data.createdAt || !isValidDate(data.createdAt)) {
   //   errors.push({ field: 'createdAt', message: 'Invalid createdAt' });
