@@ -1,7 +1,7 @@
 import { VideoInput } from '../dto/video.intput';
 import { Resolution } from '../types/video';
 import { FieldError } from '../types/FieldError';
-import { isValidDate } from '../../core/utils/error.utils'
+// import { isValidDate } from '../../core/utils/error.utils'
 
 export const videoInputDtoValidation = (data: VideoInput): FieldError[] => {
   const errors: FieldError[] = [];
@@ -24,25 +24,25 @@ export const videoInputDtoValidation = (data: VideoInput): FieldError[] => {
     errors.push({ field: 'author', message: 'Invalid author' });
   }
 
-  if (typeof data.canBeDownloaded !== 'boolean') {
-    errors.push({ field: 'canBeDownloaded', message: 'Invalid canBeDownloaded' });
-  }
+  // if (typeof data.canBeDownloaded !== 'boolean') {
+  //   errors.push({ field: 'canBeDownloaded', message: 'Invalid canBeDownloaded' });
+  // }
 
-  if (
-    data.minAgeRestriction !== null &&
-    (typeof data.minAgeRestriction !== 'number' ||
-    data.minAgeRestriction < 0)
-  ) {
-    errors.push({ field: 'minAgeRestriction', message: 'Invalid minAgeRestriction' });
-  }
+  // if (
+  //   data.minAgeRestriction !== null &&
+  //   (typeof data.minAgeRestriction !== 'number' ||
+  //   data.minAgeRestriction < 0)
+  // ) {
+  //   errors.push({ field: 'minAgeRestriction', message: 'Invalid minAgeRestriction' });
+  // }
 
-  if (!data.createdAt || !isValidDate(data.createdAt)) {
-    errors.push({ field: 'createdAt', message: 'Invalid createdAt' });
-  }
+  // if (!data.createdAt || !isValidDate(data.createdAt)) {
+  //   errors.push({ field: 'createdAt', message: 'Invalid createdAt' });
+  // }
 
-  if (!data.publicationDate || !isValidDate(data.publicationDate)) {
-    errors.push({ field: 'publicationDate', message: 'Invalid publicationDate' });
-  }
+  // if (!data.publicationDate || !isValidDate(data.publicationDate)) {
+  //   errors.push({ field: 'publicationDate', message: 'Invalid publicationDate' });
+  // }
 
   if (!Array.isArray(data.availableResolutions)) {
     errors.push({ field: 'availableResolutions', message: 'availableResolutions must be an array' });

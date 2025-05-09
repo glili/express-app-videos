@@ -6,7 +6,7 @@ export const createErrorMessages = (
   return { errorMessages: errors };
 };
 
-export function isValidDate(dateString: string): boolean {
-  const date = new Date(dateString);
-  return !isNaN(date.getTime());
-}
+// export function isValidDate(dateString: string): boolean {
+//   const date = new Date(dateString);
+//   return !isNaN(date.getTime());
+// }

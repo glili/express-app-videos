@@ -9,23 +9,6 @@ export const setupApp = (app: Express) => {
     res.status(200).send('Video App!');
   });
 
-  // app.get('/videos', (req: Request, res: Response) => {
-  //  // console.log('GET /videos endpoint hit')
-
-  //   const videos = mapToVideoListOutput(db.videos);
-  //   res.status(200).json(videos);
-  // });
-
-  // app.get('/testing', (req: Request, res: Response) => {
-  //   res.status(200).send('Testing route');
-  // });
-
-  // app.delete("/testing/all-data", (req, res) => {
-  //   db.videos = [];
-  //   res.sendStatus(HttpStatus.NoContent);
-  // });
-
-
   app.use("/videos", videosRouter);
   app.use("/testing", testingRouter);
   

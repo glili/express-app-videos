@@ -13,11 +13,6 @@ videosRouter
     res.status(200).send(db.videos);
   })
 
-  // .get("/videos", (req: Request, res: Response) => {
-  //   const videos = mapToVideoListOutput(db.videos);
-  //   res.status(200).json(videos);
-  // })
-
   .get('/:id', (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
     const video = db.videos.find((d) => d.id === id);
@@ -45,10 +40,10 @@ videosRouter
       id: db.videos.length ? db.videos[db.videos.length - 1].id + 1 : 1,
       title: req.body.title,
       author: req.body.author,
-      canBeDownloaded: req.body.canBeDownloaded,
-      minAgeRestriction: req.body.minAgeRestriction,
+      canBeDownloaded: false,
+      minAgeRestriction: null,
       availableResolutions: req.body.availableResolutions,
-      createdAt: new Date().toISOString(),
+      createdAt: new Date(Date.now()).toISOString(),
       publicationDate: new Date(Date.now() + 86400000).toISOString(),
     };
     db.videos.push(newVideo);
