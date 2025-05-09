@@ -25,7 +25,7 @@ export const videoInputDtoValidation = (data: VideoInput): FieldError[] => {
   }
 
   if (typeof data.canBeDownloaded !== 'boolean') {
-    errors.push({ field: 'canBeDownloaded', message: 'Invalid canBeDownloaded' });
+    errors.push({ message: 'Invalid canBeDownloaded', field: 'canBeDownloaded' });
   }
 
   if (
@@ -33,7 +33,7 @@ export const videoInputDtoValidation = (data: VideoInput): FieldError[] => {
     (typeof data.minAgeRestriction !== 'number' ||
     data.minAgeRestriction < 0)
   ) {
-    errors.push({ field: 'minAgeRestriction', message: 'Invalid minAgeRestriction' });
+    errors.push({ message: 'Invalid minAgeRestriction', field: 'minAgeRestriction' });
   }
 
   // if (!data.createdAt || !isValidDate(data.createdAt)) {
