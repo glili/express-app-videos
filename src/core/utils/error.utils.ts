@@ -2,8 +2,8 @@ import { FieldError } from '../../videos/types/FieldError';
 
 export const createErrorMessages = (
   errors: FieldError[],
-): { errorMessages: FieldError[] } => {
-  return { errorMessages: errors };
+): { errorsMessages: FieldError[] } => {
+  return { errorsMessages: errors };
 };
 
 // export function isValidDate(dateString: string): boolean {
