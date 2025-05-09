@@ -52,12 +52,19 @@ export const videoInputDtoValidation = (data: VideoInput): FieldError[] => {
           message:"At least on resolution should be provided",
           field:'availableResolutions',
         });
-      }
+      } else {
       const invalid = data.availableResolutions.filter(
         (res: string) => !Object.values(Resolution).includes(res as Resolution)
       );
+      if (invalid.length > 0) {
+        errors.push({
+          message: `Invalid resolution(s) provided: ${invalid.join(', ')}`,
+          field: 'availableResolutions',
+        });
+    }
 
   }
+}
 
   return errors;
 };
