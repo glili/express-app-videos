@@ -7,6 +7,7 @@ import { Video } from '../types/video';
 import { db } from '../../db/in-memory.db';
 import { VideoUpdateInput } from '../dto/video-update.input.ts';
 import { VideoCreateInput } from '../dto/video-create.input';
+import { videoUpdateDtoValidation } from '../validation/videoUpdateDtoValidation';
 
 export const videosRouter = Router({});
 
@@ -68,7 +69,7 @@ videosRouter
         return;
       }
 
-      const errors = videoInputDtoValidation(req.body);
+      const errors = videoUpdateDtoValidation(req.body);
 
       if (errors.length > 0) {
         res.status(HttpStatus.BadRequest).send(createErrorMessages(errors));
