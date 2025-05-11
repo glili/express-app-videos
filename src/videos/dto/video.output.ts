@@ -1,6 +1,6 @@
 import { Resolution } from '../types/video';
 
-export type VideoInput = {
+export type VideoOutput = {
 
     title: string;
     author: string;
@@ -10,4 +10,3 @@ export type VideoInput = {
     publicationDate: string;
     availableResolutions: Resolution[];
 };
-    // this is data we will be sent  

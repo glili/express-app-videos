@@ -1,10 +1,10 @@
 import { VideoInput } from '../dto/video.intput';
 import { Resolution } from '../types/video';
 import { FieldError } from '../types/FieldError';
-import { VideoCreateInput } from '../dto/video-create.input';
+import { VideoUpdateInput } from '../dto/video-update.input.ts';
 // import { isValidDate } from '../../core/utils/error.utils'
 
-export const videoInputDtoValidation = (data: VideoCreateInput): FieldError[] => {
+export const videoUpdateDtoValidation = (data: VideoUpdateInput): FieldError[] => {
   const errors: FieldError[] = [];
 
   if (
@@ -25,17 +25,17 @@ export const videoInputDtoValidation = (data: VideoCreateInput): FieldError[] =>
     errors.push({ message: 'Invalid author', field: 'author' });
   }
 
-  // if (typeof data.canBeDownloaded !== 'boolean') {
-  //   errors.push({ message: 'Invalid canBeDownloaded', field: 'canBeDownloaded' });
-  // }
+  if (typeof data.canBeDownloaded !== 'boolean') {
+    errors.push({ message: 'Invalid canBeDownloaded', field: 'canBeDownloaded' });
+  }
 
-  // if (
-  //   data.minAgeRestriction !== null &&
-  //   (typeof data.minAgeRestriction !== 'number' ||
-  //   data.minAgeRestriction < 0)
-  // ) {
-  //   errors.push({ message: 'Invalid minAgeRestriction', field: 'minAgeRestriction' });
-  // }
+  if (
+    data.minAgeRestriction !== null &&
+    (typeof data.minAgeRestriction !== 'number' ||
+    data.minAgeRestriction < 0)
+  ) {
+    errors.push({ message: 'Invalid minAgeRestriction', field: 'minAgeRestriction' });
+  }
 
   // if (!data.createdAt || !isValidDate(data.createdAt)) {
   //   errors.push({ field: 'createdAt', message: 'Invalid createdAt' });

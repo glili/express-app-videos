@@ -1,7 +1,6 @@
 import { Resolution } from '../types/video';
 
-export type VideoInput = {
-
+export type VideoUpdateInput = {
     title: string;
     author: string;
     canBeDownloaded: boolean;  // Default: false

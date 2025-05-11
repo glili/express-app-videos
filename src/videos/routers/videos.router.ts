@@ -5,6 +5,8 @@ import { HttpStatus } from '../../core/types/http-statuses';
 import { createErrorMessages } from '../../core/utils/error.utils';
 import { Video } from '../types/video';
 import { db } from '../../db/in-memory.db';
+import { VideoUpdateInput } from '../dto/video-update.input.ts';
+import { VideoCreateInput } from '../dto/video-create.input';
 
 export const videosRouter = Router({});
 
@@ -28,7 +30,7 @@ videosRouter
     res.status(200).send(video);
   })
 
-  .post('', (req: Request<{}, {}, VideoInput>, res: Response) => {
+  .post('', (req: Request<{}, {}, VideoCreateInput>, res: Response) => {
     const errors = videoInputDtoValidation(req.body);
 
     if (errors.length > 0) {
@@ -51,7 +53,7 @@ videosRouter
   })
 
   .put(
-    '/:id',(req: Request, res: Response) => {
+    '/:id',(req: Request<{id:string}, {}, VideoUpdateInput>, res: Response) => {
       const id = parseInt(req.params.id);
       const index = db.videos.findIndex((v) => v.id === id);
 
@@ -66,7 +68,7 @@ videosRouter
         return;
       }
 
-      const errors = videoInputDtoValidation(req.body.data);
+      const errors = videoInputDtoValidation(req.body);
 
       if (errors.length > 0) {
         res.status(HttpStatus.BadRequest).send(createErrorMessages(errors));
@@ -75,12 +77,12 @@ videosRouter
 
       const video = db.videos[index];
 
-      video.title = req.body.data.attributes.title;
-      video.author = req.body.data.attributes.author;
-      video.canBeDownloaded = req.body.data.attributes.canBeDownloaded;
-      video.minAgeRestriction = req.body.data.attributes.minAgeRestriction;
+      video.title = req.body.title;
+      video.author = req.body.author;
+      video.canBeDownloaded = req.body.canBeDownloaded;
+      video.minAgeRestriction = req.body.minAgeRestriction;
       video.publicationDate = new Date().toISOString(),
-      video.availableResolutions = req.body.data.attributes.availableResolutions;
+      video.availableResolutions = req.body.availableResolutions;
 
       res.sendStatus(HttpStatus.NoContent);
     },
