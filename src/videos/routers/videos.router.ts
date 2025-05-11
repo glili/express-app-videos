@@ -55,7 +55,7 @@ videosRouter
 
   .put(
     '/:id',(req: Request<{id:string}, {}, VideoUpdateInput>, res: Response) => {
-      const id = parseInt(req.params.id);
+      const id = Number(req.params.id);
       const index = db.videos.findIndex((v) => v.id === id);
 
       if (index === -1) {
