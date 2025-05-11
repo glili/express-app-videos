@@ -32,7 +32,8 @@ export const videoUpdateDtoValidation = (data: VideoUpdateInput): FieldError[] =
   if (
     data.minAgeRestriction !== null &&
     (typeof data.minAgeRestriction !== 'number' ||
-    data.minAgeRestriction < 0)
+    data.minAgeRestriction < 0 ||
+    data.minAgeRestriction > 18 )
   ) {
     errors.push({ message: 'Invalid minAgeRestriction', field: 'minAgeRestriction' });
   }
