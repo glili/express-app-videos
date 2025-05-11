@@ -2,7 +2,7 @@ import { VideoInput } from '../dto/video.intput';
 import { Resolution } from '../types/video';
 import { FieldError } from '../types/FieldError';
 import { VideoUpdateInput } from '../dto/video-update.input.ts';
-// import { isValidDate } from '../../core/utils/error.utils'
+import { isValidDate } from '../../core/utils/error.utils'
 
 export const videoUpdateDtoValidation = (data: VideoUpdateInput): FieldError[] => {
   const errors: FieldError[] = [];
@@ -42,9 +42,9 @@ export const videoUpdateDtoValidation = (data: VideoUpdateInput): FieldError[] =
   //   errors.push({ field: 'createdAt', message: 'Invalid createdAt' });
   // }
 
-  // if (!data.publicationDate || !isValidDate(data.publicationDate)) {
-  //   errors.push({ field: 'publicationDate', message: 'Invalid publicationDate' });
-  // }
+  if (!data.publicationDate || !isValidDate(data.publicationDate)) {
+    errors.push({ field: 'publicationDate', message: 'Invalid publicationDate' });
+  }
 
   if (!Array.isArray(data.availableResolutions)) {
     errors.push({ message: 'availableResolutions must be an array', field: 'availableResolutions' });
