@@ -82,7 +82,7 @@ videosRouter
       video.author = req.body.author;
       video.canBeDownloaded = req.body.canBeDownloaded;
       video.minAgeRestriction = req.body.minAgeRestriction;
-      video.publicationDate = new Date().toISOString(),
+      video.publicationDate = new Date(Date.now()).toISOString(),
       video.availableResolutions = req.body.availableResolutions;
 
       res.sendStatus(HttpStatus.NoContent);
